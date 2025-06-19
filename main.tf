@@ -1,8 +1,8 @@
 resource "aws_launch_template" "web_server_as" {
     name = "myproject"
-    image_id           = "ami-091dccf4e2d272bae"
+    image_id           = "ami-00b7ea845217da02c"
     vpc_security_group_ids = [aws_security_group.web_server.id]
-    instance_type = "t2.medium"
+    instance_type = "t2.micro"
     key_name = "terraform-key-pair"
     tags = {
         Name = "DevOps"
