@@ -45,13 +45,12 @@ resource "aws_autoscaling_group" "web_server_asg" {
     max_size             = 3
     desired_capacity     = 2
     health_check_type    = "EC2"
-    load_balancers       = [aws_lb.web_server_lb.name]
     availability_zones    = ["ap-south-1a", "ap-south-1b"] 
     launch_template {
         id      = aws_launch_template.web_server_as.id
         version = "$Latest"
       }
-    
+target_group_arns = [aws_lb_target_group.web_server_tg.arn]
     
   }
 
