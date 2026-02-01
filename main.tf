@@ -17,16 +17,28 @@ resource "aws_launch_template" "web_server_as" {
      load_balancer_type = "application"
      security_groups = [aws_security_group.web_server.id]
      subnets = ["subnet-092d83e1f27567bac", "subnet-056d0a81628ddd6da"]
-     listener {
-      instance_port     = 8000
-      instance_protocol = "http"
-      lb_port           = 80
-      lb_protocol       = "http"
-    }
     tags = {
       Name = "terraform-alb"
     }
   }
+resource "aws_lb_target_group" "web_server_tg" {
+  name     = "web-server-tg"
+  port     = 8000
+  protocol = "HTTP"
+  vpc_id   = "vpc-0f47eccfd6b1ea46c"
+}
+
+resource "aws_lb_listener" "web_server_listener" {
+  load_balancer_arn = aws_lb.web_server_lb.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.web_server_tg.arn
+  }
+}
+
 resource "aws_autoscaling_group" "web_server_asg" {
     name                 = "web-server-asg"
     min_size             = 1
