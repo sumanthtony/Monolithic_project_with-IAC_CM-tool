@@ -1,11 +1,11 @@
 resource "aws_launch_template" "web_server_as" {
     name = "myproject"
-    image_id           = "ami-0ff5003538b60d5ec"
+    image_id           = "ami-09ed39e30153c3bf9"
     vpc_security_group_ids = [aws_security_group.web_server.id]
-    instance_type = "t3.micro"
+    instance_type = "t3.small"
     key_name = "Mumbai-kp"
     tags = {
-        Name = "DevOps"
+        Name = "DevOps-servers"
     }
     
 }
@@ -16,7 +16,7 @@ resource "aws_launch_template" "web_server_as" {
      name = "web-server-lb"
      load_balancer_type = "application"
      security_groups = [aws_security_group.web_server.id]
-     subnets = ["subnet-092d83e1f27567bac", "subnet-056d0a81628ddd6da"]
+     subnets = ["subnet-00f0e4183f3b8fe00", "subnet-0d9338ba2a44a581a"]
     tags = {
       Name = "terraform-alb"
     }
@@ -25,7 +25,7 @@ resource "aws_lb_target_group" "web_server_tg" {
   name     = "web-server-tg"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = "vpc-0f47eccfd6b1ea46c"
+  vpc_id   = "vpc-0258a4f3bfcab844b"
 }
 
 resource "aws_lb_listener" "web_server_listener" {
