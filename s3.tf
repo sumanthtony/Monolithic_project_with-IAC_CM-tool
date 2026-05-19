@@ -23,3 +23,11 @@ status = "Enabled"
 }
 }
 
+terraform {
+backend "s3" {
+region = "ap-south-1"
+bucket = "yesh.95.battagiri"
+key = "prod/terraform.tfstate"
+}
+}
+
