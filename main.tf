@@ -45,7 +45,7 @@ resource "aws_autoscaling_group" "web_server_asg" {
     max_size             = 3
     desired_capacity     = 2
     health_check_type    = "EC2"
-    availability_zones    = ["ap-south-1a", "ap-south-1b"] 
+    vpc_zone_identifier    = ["subnet-00f0e4183f3b8fe00", "subnet-0d9338ba2a44a581a"] 
     launch_template {
         id      = aws_launch_template.web_server_as.id
         version = "$Latest"
