@@ -23,7 +23,7 @@ resource "aws_launch_template" "web_server_as" {
   }
 resource "aws_lb_target_group" "web_server_tg" {
   name     = "web-server-tg"
-  port     = 80
+  port     = 8080
   protocol = "HTTP"
   vpc_id   = "vpc-0258a4f3bfcab844b"
 }
